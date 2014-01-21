@@ -37,6 +37,7 @@ public:
     void setupDouble(QString title,QString description,double value,double min,double max,double increment);
     void setupCombo(QString title,QString description,QList<QPair<int,QString> > list);
     void setValue(double value);
+    void setHidden(bool hidden);
 signals:
     void doubleValueChanged(QString param,double value);
     void intValueChanged(QString param,int value);

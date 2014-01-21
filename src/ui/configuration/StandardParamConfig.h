@@ -40,9 +40,15 @@ private slots:
     void parameterChanged(int uas, int component, QString parameterName, QVariant value);
     void doubleValueChanged(QString param,double value);
     void intValueChanged(QString param,int value);
+    void hideParameterWidgets(bool hide);
+    void findParameterWidget(const QString& searchString);
+    void clearSearch();
+
 private:
-    QMap<QString,ParamWidget*> paramToWidgetMap;
     Ui::StandardParamConfig ui;
+
+    QMap<QString,ParamWidget*> m_paramToWidgetMap;
+    bool m_findMode;
 };
 
 #endif // STANDARDPARAMCONFIG_H

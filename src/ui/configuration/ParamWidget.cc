@@ -305,3 +305,13 @@ void ParamWidget::setValue(double value)
         }
     }
 }
+
+void ParamWidget::setHidden(bool hidden)
+{
+    QWidgetList list = findChildren<QWidget*>("");
+
+    foreach(QWidget* widget, list){
+        widget->setHidden(hidden);
+    }
+
+}

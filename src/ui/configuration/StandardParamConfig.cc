@@ -19,24 +19,30 @@ This file is part of the APM_PLANNER project
     along with APM_PLANNER. If not, see <http://www.gnu.org/licenses/>.
 
 ======================================================================*/
-
+#include "QsLog.h"
 #include "StandardParamConfig.h"
 #include "ParamWidget.h"
 #include "QGCMouseWheelEventFilter.h"
-StandardParamConfig::StandardParamConfig(QWidget *parent) : AP2ConfigWidget(parent)
+
+StandardParamConfig::StandardParamConfig(QWidget *parent) : AP2ConfigWidget(parent),
+    m_findMode(false)
 {
     ui.setupUi(this);
     initConnections();
+    connect(ui.searchLineEdit, SIGNAL(textEdited(QString)), this, SLOT(findParameterWidget(QString)));
+    connect(ui.clearButton, SIGNAL(clicked()), this, SLOT(clearSearch()));
 }
+
 StandardParamConfig::~StandardParamConfig()
 {
 }
+
 void StandardParamConfig::addRange(QString title,QString description,QString param,double min,double max,double increment)
 {
     ParamWidget *widget = new ParamWidget(param,ui.scrollAreaWidgetContents);
     connect(widget,SIGNAL(doubleValueChanged(QString,double)),this,SLOT(doubleValueChanged(QString,double)));
     connect(widget,SIGNAL(intValueChanged(QString,int)),this,SLOT(intValueChanged(QString,int)));
-    paramToWidgetMap[param] = widget;
+    m_paramToWidgetMap[param] = widget;
     widget->setupDouble(title + "(" + param + ")",description,0,min,max,increment);
     ui.verticalLayout->addWidget(widget);
     widget->installEventFilter(QGCMouseWheelEventFilter::getFilter());
@@ -48,7 +54,7 @@ void StandardParamConfig::addCombo(QString title,QString description,QString par
     ParamWidget *widget = new ParamWidget(param,ui.scrollAreaWidgetContents);
     connect(widget,SIGNAL(doubleValueChanged(QString,double)),this,SLOT(doubleValueChanged(QString,double)));
     connect(widget,SIGNAL(intValueChanged(QString,int)),this,SLOT(intValueChanged(QString,int)));
-    paramToWidgetMap[param] = widget;
+    m_paramToWidgetMap[param] = widget;
     widget->setupCombo(title + "(" + param + ")",description,valuelist);
     ui.verticalLayout->addWidget(widget);
     widget->installEventFilter(QGCMouseWheelEventFilter::getFilter());
@@ -56,15 +62,18 @@ void StandardParamConfig::addCombo(QString title,QString description,QString par
 }
 void StandardParamConfig::parameterChanged(int uas, int component, QString parameterName, QVariant value)
 {
-    if (paramToWidgetMap.contains(parameterName))
+    Q_UNUSED(uas);
+    Q_UNUSED(component);
+
+    if (m_paramToWidgetMap.contains(parameterName))
     {
         if (value.type() == QVariant::Double || value.type() == QMetaType::Float)
         {
-            paramToWidgetMap[parameterName]->setValue(value.toDouble());
+            m_paramToWidgetMap[parameterName]->setValue(value.toDouble());
         }
         else
         {
-            paramToWidgetMap[parameterName]->setValue(value.toInt());
+            m_paramToWidgetMap[parameterName]->setValue(value.toInt());
         }
     }
 }
@@ -84,5 +93,47 @@ void StandardParamConfig::intValueChanged(QString param,int value)
         this->showNullMAVErrorMessageBox();
     }
     m_uas->getParamManager()->setParameter(1,param,value);
+}
+
+void StandardParamConfig::hideParameterWidgets(bool hide)
+{
+    QLOG_DEBUG() << "StandardParamConfig::hideParameterWidgets : " << m_paramToWidgetMap.count();
+    int count = 0;
+    foreach(const QString paramKey, m_paramToWidgetMap.keys()){
+
+        ParamWidget *paramWidget = m_paramToWidgetMap.value(paramKey);
+        QLOG_DEBUG() << "Hide Widget " << paramKey << tr("(%1)").arg(count) << m_paramToWidgetMap.value(paramKey);
+        if (hide)
+            ui.verticalLayout->removeWidget(paramWidget);
+        count++;
+    }
+
+}
+
+void StandardParamConfig::findParameterWidget(const QString &searchString)
+{
+    QLOG_DEBUG() << "StandardParamConfig::findParameterWidget" << searchString;
+    if (searchString.length() < 3)
+        return; // Require 3 or more characters to work
+    if(!m_findMode){
+        m_findMode = true;
+        hideParameterWidgets(true);
+
+    }
+
+//    QRegExp expression(searchString);
+//    QMap<QString, ParamWidget* >::const_iterator i = m_paramToWidgetMap.find(searchString);
+//    while (i != m_paramToWidgetMap.end() && i.key().contains(searchString)){
+//        QLOG_DEBUG() << "Key" << i.key() << ": " << i.value();
+//        ++i;
+//    }
+
+}
+
+void StandardParamConfig::clearSearch()
+{
+    QLOG_DEBUG() << "StandardParamConfig::clearSearch";
+    hideParameterWidgets(false);
+    m_findMode = false;
 }
 
