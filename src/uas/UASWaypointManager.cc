@@ -552,6 +552,7 @@ void UASWaypointManager::loadWaypoints(const QString &loadFile)
             {
                 t->setId(waypointsEditable.count());
                 waypointsEditable.insert(waypointsEditable.count(), t);
+                QApplication::processEvents();
             }
             else
             {

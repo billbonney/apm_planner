@@ -31,6 +31,7 @@ This file is part of the PIXHAWK project
  *
  */
 
+#include "QsLog.h"
 #include "WaypointList.h"
 #include "ui_WaypointList.h"
 #include <UASInterface.h>
@@ -618,14 +619,20 @@ void WaypointList::clearWPWidget()
         // Get list
         const QList<Waypoint *> &waypoints = WPM->getWaypointEditableList();
 
-
         // XXX delete wps as well
 
         // Clear UI elements
         //Remove all but 1 waypoint, since the first is "home" on APM
         //Also, remove from the END first, work your way back to the first
-        while(waypoints.size() > 1) {
+        QLOG_DEBUG() << "waypoint size" << waypoints.size();
+        for (int count = waypoints.size()-1; count != 1; count--){
             WaypointEditableView* widget = wpEditableViews.find(waypoints[waypoints.size()-1]).value();
+            widget->blockSignals(true);
             widget->remove();
+            delete widget;
+            widget == NULL;
+            removeWaypoint(waypoints[count]);
+            QLOG_DEBUG() << "waypoint size" << waypoints.size();
+            QApplication::processEvents();
         }
 }

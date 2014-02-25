@@ -70,8 +70,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>836</width>
-            <height>316</height>
+            <width>834</width>
+            <height>325</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -282,8 +282,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>836</width>
-            <height>316</height>
+            <width>834</width>
+            <height>323</height>
            </rect>
           </property>
           <property name="autoFillBackground">
