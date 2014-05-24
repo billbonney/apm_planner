@@ -569,10 +569,12 @@ void PX4FirmwareUploader::run()
                 {
                     QLOG_FATAL() << "PX4Firmware Uploader failed OTP check! Internal public key is not valid. Possible corrupted install?";
                     emit statusUpdate("PX4Firmware Uploader failed OTP check! Internal public key is not valid. Possible corrupted install?");
+#ifdef OTP_CHECK
                     emit error("PX4Firmware Uploader failed OTP check! Internal public key is not valid. Possible corrupted install?");
                     m_port->close();
                     delete m_port;
                     return;
+#endif
                 }
 
                 int verify = RSA_verify(NID_sha1,(unsigned char*)serial.data(),serial.size(),(unsigned char*)signature.data(),signature.size(),pkey->pkey.rsa);
@@ -581,10 +583,12 @@ void PX4FirmwareUploader::run()
                     //Failed!
                     QLOG_FATAL() << "PX4Firmware Uploader failed OTP check";
                     emit statusUpdate("PX4Firmware Uploader failed OTP check");
+#ifdef OTP_CHECK
                     emit error("PX4Firmware Uploader failed OTP check! Are you sure this is a legimiate 3DR PX4?");
                     m_port->close();
                     delete m_port;
-                    return;
+                     return;
+#endif
                 }
                 QLOG_DEBUG() << "OTP verification successful";
                 emit statusUpdate("OTP verification successful");
