@@ -54,6 +54,7 @@ ApmHardwareConfig::ApmHardwareConfig(QWidget *parent) : AP2ConfigWidget(parent),
     ui.osdButton->setVisible(false);
     ui.cameraGimbalButton->setVisible(false);
     ui.antennaTrackerButton->setVisible(false);
+    ui.testsButton->setVisible(false);
 
     ui.hiddenPushButton->setVisible(false); // And it's checked.
     ui.radio3DRLargeButton->setVisible(true); // [SHOW 3DR RADIO]
@@ -142,6 +143,11 @@ ApmHardwareConfig::ApmHardwareConfig(QWidget *parent) : AP2ConfigWidget(parent),
     m_buttonToConfigWidgetMap[ui.antennaTrackerLargeButton] = m_antennaTrackerConfig;
     connect(ui.antennaTrackerButton,SIGNAL(clicked()),this,SLOT(activateStackedWidget()));
     connect(ui.antennaTrackerLargeButton,SIGNAL(clicked()),this,SLOT(activateStackedWidget()));
+
+    m_testConfig = new TestConfig(this);
+    ui.stackedWidget->addWidget(m_testConfig);
+    m_buttonToConfigWidgetMap[ui.testsButton] = m_testConfig;
+    connect(ui.testsButton,SIGNAL(clicked()),this,SLOT(activateStackedWidget()));
 
     m_setupWarningMessage = new SetupWarningMessage(this);
     ui.stackedWidget->addWidget(m_setupWarningMessage);
@@ -233,6 +239,7 @@ void ApmHardwareConfig::uasDisconnected()
     ui.optionalHardwareButton->setVisible(false);
 
     ui.antennaTrackerButton->setVisible(false);
+    ui.testsButton->setVisible(false);
 
     ui.mandatoryHardware->setVisible(false);
     ui.mandatoryHardware->setChecked(false);
@@ -344,6 +351,7 @@ void ApmHardwareConfig::toggleButtonsShown(bool show)
         ui.cameraGimbalButton->setVisible(!show);// [SHOW Camera Gimbal]
 //        ui.antennaTrackerButton->setShown(!show);// [HIDE Antenna Tracking]
         ui.rangeFinderButton->setVisible(!show);
+        ui.testsButton->setVisible(!show);
 
     } else if (m_uas->isFixedWing()){
         QLOG_DEBUG() << "FixedWing";
@@ -364,6 +372,7 @@ void ApmHardwareConfig::toggleButtonsShown(bool show)
         ui.cameraGimbalButton->setVisible(!show); // [SHOW Camera Gimbal]
 //        ui.antennaTrackerButton->setShown(!show); // [HIDE Antenna Tracking]
         ui.airspeedButton->setVisible(!show);
+        ui.testsButton->setVisible(!show);
 
     } else {
         // Assume Ground Vehicle et al.
@@ -387,6 +396,7 @@ void ApmHardwareConfig::toggleButtonsShown(bool show)
         ui.cameraGimbalButton->setVisible(!show); // [SHOW Camera Gimbal]
 //        ui.antennaTrackerButton->setShown(!show); // [HIDE Antenna Tracking]
         ui.rangeFinderButton->setVisible(!show);
+        ui.testsButton->setVisible(!show);
     }
 }
 

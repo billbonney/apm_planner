@@ -425,6 +425,8 @@ FORMS += \
     src/ui/DroneshareDialog.ui \
     src/ui/uas/PreFlightCalibrationDialog.ui \
     src/ui/configuration/RadioFlashWizard.ui
+    src/ui/configuration/TestConfig.ui
+
 
 HEADERS += \
     src/MG.h \
@@ -649,7 +651,8 @@ HEADERS += \
     src/ui/AP2DataPlot2DModel.h \
     src/ui/uas/PreFlightCalibrationDialog.h \
     src/ui/configuration/RadioFlashWizard.h \
-    src/ui/GraphTreeWidgetItem.h
+    src/ui/GraphTreeWidgetItem.h \
+    src/ui/configuration/TestConfig.h
 
 SOURCES += src/main.cc \
     src/QGCCore.cc \
@@ -867,7 +870,8 @@ SOURCES += src/main.cc \
     src/ui/AP2DataPlot2DModel.cc \
     src/ui/uas/PreFlightCalibrationDialog.cpp \
     src/ui/configuration/RadioFlashWizard.cpp \
-    src/ui/GraphTreeWidgetItem.cc
+    src/ui/GraphTreeWidgetItem.cc \
+    src/ui/configuration/TestConfig.cc
 
 OTHER_FILES += \
     qml/components/DigitalDisplay.qml \

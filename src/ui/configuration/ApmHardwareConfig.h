@@ -54,6 +54,7 @@ This file is part of the APM_PLANNER project
 #include "FlightModeConfig.h"
 #include "FailSafeConfig.h"
 #include "SetupWarningMessage.h"
+#include "TestConfig.h"
 
 class ApmHardwareConfig : public AP2ConfigWidget
 {
@@ -98,6 +99,7 @@ private:
     QPointer<OsdConfig> m_osdConfig;
     QPointer<CameraGimbalConfig> m_cameraGimbalConfig;
     QPointer<AntennaTrackerConfig> m_antennaTrackerConfig;
+    QPointer<TestConfig> m_testConfig;
 
     QPointer<SetupWarningMessage> m_setupWarningMessage;
 
