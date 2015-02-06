@@ -1,4 +1,7 @@
-APM Planner
+APM Planner 2.0
+===============
+
+[![Join the chat at https://gitter.im/billbonney/apm_planner](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/billbonney/apm_planner?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Project:
 http://github.com/diydrones/apm_planner
@@ -9,22 +12,18 @@ https://github.com/diydrones/apm_planner
 Credits:
 http://planner2.ardupilot.com/credits-and-contributors/
 
+Developer Chat: https://gitter.im/diydrones/apm_planner
+
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/diydrones/apm_planner?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Documentation
 =============
 see http://planner2.ardupilot.com
 
-
 Mac OS X
 ========
 
 To build on Mac OS X (10.6 or later):
-
-Install SDL
------------
-1) Download SDL from:  <http://www.libsdl.org/release/SDL-1.2.14.dmg>
-
-2) From the SDL disk image, copy the `sdl.framework` bundle to `/Library/Frameworks` directory (if you are not an admin copy to `~/Library/Frameworks`)
 
 Install QT
 -----------
