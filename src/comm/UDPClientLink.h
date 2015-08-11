@@ -73,16 +73,21 @@ public slots:
     void setPort(int port);
 
     void readBytes();
+    /**
+     * @brief Write a number of bytes to the interface.
+     *
+     * @param data Pointer to the data byte array
+     * @param size The size of the bytes array
+     **/
     void writeBytes(const char* data, qint64 length);
 
     bool connect();
     bool disconnect();
 
-protected slots:
+private slots:
     void _socketError(QAbstractSocket::SocketError socketError);
     void _socketDisconnected();
 
-private slots:
     void _sendTriggerMessage();
 
 private: // Helper Methods

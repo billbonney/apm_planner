@@ -203,13 +203,13 @@ bool UDPClientLink::_hardwareConnect()
         emit connected();
         QTimer::singleShot(5000, this, SLOT(_sendTriggerMessage()));
         return true;
-    } else {
-        QLOG_ERROR() << "connect failed! " << _targetHost.toString() << ":" << _port
-                     << " err:" << _socket.error() << ": " << _socket.errorString();
-        emit connected(false);
-        emit disconnected(this);
-        emit disconnected();
     }
+
+    QLOG_ERROR() << "connect failed! " << _targetHost.toString() << ":" << _port
+                 << " err:" << _socket.error() << ": " << _socket.errorString();
+    emit connected(false);
+    emit disconnected(this);
+    emit disconnected();
     return false;
 }
 
