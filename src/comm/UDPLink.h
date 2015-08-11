@@ -58,9 +58,7 @@ public:
 
     bool isConnected() const;
     qint64 bytesAvailable();
-    int getPort() const {
-        return port;
-    }
+    quint16 getPort() const;
 
     /**
      * @brief The human readable port name
@@ -74,12 +72,8 @@ public:
     int getParityType() const;
     int getDataBitsType() const;
     int getStopBitsType() const;
-    QList<QHostAddress> getHosts() const {
-        return hosts;
-    }
-    QList<quint16> getPorts() const {
-        return ports;
-    }
+    QList<QHostAddress> getHosts() const;
+    QList<quint16> getPorts() const;
 
     // Extensive statistics for scientific purposes
     qint64 getConnectionSpeed() const;
@@ -95,11 +89,11 @@ public:
 public slots:
     void setAddress(QHostAddress host);
     void setPort(int port);
+
     /** @brief Add a new host to broadcast messages to */
     void addHost(const QString& host);
     /** @brief Remove a host from broadcasting messages to */
     void removeHost(const QString& host);
-    //    void readPendingDatagrams();
 
     void readBytes();
     /**
@@ -109,35 +103,33 @@ public slots:
      * @param size The size of the bytes array
      **/
     void writeBytes(const char* data, qint64 length);
+
     bool connect();
     bool disconnect();
 
-private:
-    QString name;
-    QHostAddress host;
-    quint16 port;
-    int id;
-    QUdpSocket* socket;
-    bool connectState;
-    QList<QHostAddress> hosts;
-    QList<quint16> ports;
+private slots:
+    void _socketError(QAbstractSocket::SocketError socketError);
+    void _socketDisconnected();
 
-    QMutex dataMutex;
+    void _sendTriggerMessage();
 
+private: // Helper Methods
     void setName(QString name);
+    bool _hardwareConnect();
+    void _resetName();
 
 private:
-	bool hardwareConnect(void);
-    void restartConnection();
+    QString _name;
+    QHostAddress _sourceHost;
+    quint16 _port;
+    int _linkId;
+    QUdpSocket _socket;
+    bool _packetsReceived;
 
-    bool                _running;
-    QMutex              _mutex;
-    QQueue<QByteArray*> _outQueue;
+    QList<QHostAddress> _targetHosts;
+    QList<quint16> _targetPorts;
 
-    bool _dequeBytes    ();
-    void _sendBytes     (const char* data, qint64 size);
-
-
+    QMutex _dataMutex;
 };
 
 #endif // UDPLINK_H
