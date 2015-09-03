@@ -11,10 +11,14 @@
 //    You should have received a copy of the GNU General Public License
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
-//    (c) 2014 Author: Bill Bonney <billbonney@communistech.com>
+//    (c) 2015 Author: Bill Bonney <billbonney@communistech.com>
 //
 
-import QtQuick 2.0
+import QtQuick 2.2
+import QtQuick.Controls 1.4
+import QtQuick.Controls.Styles 1.4
+//import QtQuick.Extras 1.4
+
 import "./components"
 
 Rectangle {
@@ -23,7 +27,7 @@ Rectangle {
 
     function activeUasSet() {
         console.log("Vibration Monitor: Active UAS is now set");
-        vibrationXIndicator.value = Qt.binding(function() { return vehicleOverview.vibration_x})
+        vibrationXIndicator.value = Qt.binding(function() { return vehicleOverview.vibration.x})
         vibrationYIndicator.value = Qt.binding(function() { return vehicleOverview.vibration.y})
         vibrationZIndicator.value = Qt.binding(function() { return vehicleOverview.vibration.z})
     }
@@ -32,6 +36,26 @@ Rectangle {
         console.log("Vibration Monitor: Active UAS is now unset");
         //Code to make display show a lack of connection here.
     }
+
+//    ProgressBar {
+//        width: parent.width
+//        height: parent.height
+//        value: 50
+//        style: ProgressBarStyle {
+//            background: Rectangle {
+//                radius: 2
+//                color: "lightgray"
+//                border.color: "gray"
+//                border.width: 1
+//                implicitWidth: 200
+//                implicitHeight: 24
+//            }
+//            progress: Rectangle {
+//                color: "lightsteelblue"
+//                border.color: "steelblue"
+//            }
+//        }
+//    }
 
     Column {
         id: col1
@@ -59,6 +83,7 @@ Rectangle {
             text: qsTr(" Vib Z ") + value
             font.pixelSize: 12
         }
+
     }
 
 
