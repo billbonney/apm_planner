@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>397</width>
-    <height>331</height>
+    <width>436</width>
+    <height>330</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -38,7 +38,7 @@
      <height>281</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,2,2,2,0">
+   <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,2,2,2,0,0">
     <item>
      <widget class="QLabel" name="accelDescLabel">
       <property name="text">
@@ -144,6 +144,16 @@ Accel Calibration</string>
      <widget class="Line" name="line">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QCheckBox" name="legacyCheckBox">
+      <property name="toolTip">
+       <string>Enables compatibility mode for older ardupilot firmware.</string>
+      </property>
+      <property name="text">
+       <string>Legacy Mode</string>
       </property>
      </widget>
     </item>

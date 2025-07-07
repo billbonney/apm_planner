@@ -215,13 +215,15 @@ void ArduPilotMegaMAV::receiveMessage(LinkInterface* link, mavlink_message_t mes
             }
 
         } break;
+
         default:
             //QLOG_DEBUG() << "\nARDUPILOT RECEIVED MESSAGE WITH ID" << message.msgid;
             break;
         }
+    } else {
+        QLOG_DEBUG() << "System ID != uasId: systemId = " << message.sysid;
     }
-
-    // default Bea
+    // default
     UAS::receiveMessage(link, message);
 }
 

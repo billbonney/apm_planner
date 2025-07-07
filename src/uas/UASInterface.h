@@ -707,11 +707,11 @@ signals:
     void logData(uint32_t uasId, uint32_t ofs, uint16_t id, uint8_t count, const char* data);
 
     void protocolStatusMessage(const QString& title, const QString& message);
-    //void valueChanged(const int uasId, const QString& name, const QString& unit, const QVariant& value, const quint64 msec);
-    //void textMessageReceived(int uasid, int componentid, int severity, const QString& text);
     void receiveLossChanged(int id,float value);
 
-    void mavlinkMessageRecieved(LinkInterface *link,mavlink_message_t message);
+    void mavlinkMessageRecieved(LinkInterface *link, mavlink_message_t message);
+
+    void mavlinkMessageCommandLong(UASInterface* uas, mavlink_command_long_t &command_long);
 
 protected:
 

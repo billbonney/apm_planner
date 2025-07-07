@@ -46,10 +46,12 @@ public:
     ~AccelCalibrationConfig();
 protected:
     void hideEvent(QHideEvent *evt);
+
 private slots:
     void activeUASSet(UASInterface *uas);
     void calibrateButtonClicked();
     void calibrateSimpleButtonClicked();
+    void mavlinkMessageCommandLong(UASInterface* uas,mavlink_command_long_t& command_long);
     void uasTextMessageReceived(int uasid, int componentid, int severity, QString text);
     void uasConnected();
     void uasDisconnected();
@@ -57,18 +59,24 @@ private slots:
     void cancelCalibration();
 
 private:
+    void startCalibration();
+
+private:
     enum class CalibrationType {
-        None = 0,
         Full_Calibration = 1,
-        Simple_Calibration = 2
+        Simple_Calibration = 2,
+        Legacy_Calibration = 3
     };
 
+    bool isInCalibration {false};
     int m_accelAckCount = -1;
     Ui::AccelCalibrationConfig ui;
-    bool m_muted;
-    CalibrationType m_calibrationType = CalibrationType::None;
+    bool m_muted {false};
+    CalibrationType m_calibrationType {CalibrationType::Legacy_Calibration};
     QTimer m_countdownTimer;
     int m_countdownCount;
+
+    int m_position {0};
 };
 
 #endif // ACCELCALIBRATIONCONFIG_H
