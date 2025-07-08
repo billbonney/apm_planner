@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>409</width>
-    <height>408</height>
+    <width>446</width>
+    <height>377</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -47,16 +47,16 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>-430</y>
-        <width>195</width>
-        <height>804</height>
+        <y>0</y>
+        <width>201</width>
+        <height>745</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_12">
        <item>
         <layout class="QVBoxLayout" name="navBarLayout">
          <property name="sizeConstraint">
-          <enum>QLayout::SetNoConstraint</enum>
+          <enum>QLayout::SetMinAndMaxSize</enum>
          </property>
          <item>
           <widget class="QPushButton" name="firmwareButton">
@@ -127,6 +127,12 @@
          </item>
          <item alignment="Qt::AlignRight">
           <widget class="QPushButton" name="frameTypeButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
              <width>150</width>
@@ -158,6 +164,12 @@
          </item>
          <item alignment="Qt::AlignRight">
           <widget class="QPushButton" name="compassButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
              <width>150</width>
@@ -183,6 +195,12 @@
          </item>
          <item alignment="Qt::AlignRight">
           <widget class="QPushButton" name="accelCalibrateButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
              <width>150</width>
@@ -214,6 +232,12 @@
          </item>
          <item alignment="Qt::AlignRight">
           <widget class="QPushButton" name="arduPlaneLevelButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
              <width>150</width>
@@ -245,6 +269,12 @@
          </item>
          <item alignment="Qt::AlignRight">
           <widget class="QPushButton" name="radioCalibrateButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
              <width>150</width>
@@ -273,6 +303,12 @@
          </item>
          <item alignment="Qt::AlignRight">
           <widget class="QPushButton" name="flightModesButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
              <width>150</width>
@@ -298,6 +334,12 @@
          </item>
          <item alignment="Qt::AlignRight">
           <widget class="QPushButton" name="failSafeButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
              <width>150</width>
@@ -362,6 +404,12 @@
          </item>
          <item alignment="Qt::AlignRight">
           <widget class="QPushButton" name="batteryMonitorButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
              <width>150</width>
@@ -387,6 +435,12 @@
          </item>
          <item alignment="Qt::AlignRight">
           <widget class="QPushButton" name="rangeFinderButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
              <width>150</width>
@@ -412,6 +466,12 @@
          </item>
          <item alignment="Qt::AlignRight">
           <widget class="QPushButton" name="airspeedButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
              <width>150</width>
@@ -437,6 +497,12 @@
          </item>
          <item alignment="Qt::AlignRight">
           <widget class="QPushButton" name="opticalFlowButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
              <width>150</width>
@@ -462,6 +528,12 @@
          </item>
          <item alignment="Qt::AlignRight">
           <widget class="QPushButton" name="osdButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
              <width>150</width>
@@ -487,6 +559,12 @@
          </item>
          <item alignment="Qt::AlignRight">
           <widget class="QPushButton" name="cameraGimbalButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
              <width>150</width>
@@ -512,6 +590,12 @@
          </item>
          <item alignment="Qt::AlignRight">
           <widget class="QPushButton" name="antennaTrackerButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
              <width>150</width>
@@ -537,15 +621,21 @@
          </item>
          <item>
           <widget class="QPushButton" name="radio3DRLargeButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
-             <width>0</width>
+             <width>175</width>
              <height>30</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>16777215</width>
+             <width>175</width>
              <height>30</height>
             </size>
            </property>
@@ -568,15 +658,21 @@
          </item>
          <item>
           <widget class="QPushButton" name="antennaTrackerLargeButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
-             <width>0</width>
+             <width>175</width>
              <height>30</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>16777215</width>
+             <width>175</width>
              <height>30</height>
             </size>
            </property>
@@ -599,6 +695,24 @@
          </item>
          <item>
           <widget class="QPushButton" name="hiddenPushButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>175</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>175</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="text">
             <string>hidden</string>
            </property>

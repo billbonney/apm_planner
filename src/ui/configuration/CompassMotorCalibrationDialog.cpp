@@ -54,7 +54,7 @@ CompassMotorCalibrationDialog::CompassMotorCalibrationDialog(QWidget *parent) :
     activeUASSet(UASManager::instance()->getActiveUAS());
 
     int ok = QMessageBox::warning(
-        this,
+        parent,
         "Compass Motor Calibration",
         tr("CAUTION: Starting the compass motor calibration arms the motors.\n"
            "Please make sure you have read and followed all instructions"

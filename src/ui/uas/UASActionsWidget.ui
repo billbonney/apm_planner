@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>417</width>
-    <height>315</height>
+    <width>421</width>
+    <height>423</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -40,7 +40,7 @@
      <property name="maximumSize">
       <size>
        <width>16777215</width>
-       <height>125</height>
+       <height>16777215</height>
       </size>
      </property>
      <property name="title">
@@ -64,12 +64,24 @@
         <property name="sizeConstraint">
          <enum>QLayout::SetMaximumSize</enum>
         </property>
+        <property name="horizontalSpacing">
+         <number>6</number>
+        </property>
+        <property name="verticalSpacing">
+         <number>2</number>
+        </property>
         <item row="0" column="2">
          <widget class="QPushButton" name="restartMissionButton">
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>17</height>
+            <height>20</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
            </size>
           </property>
           <property name="text">
@@ -82,7 +94,7 @@
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>14</height>
+            <height>20</height>
            </size>
           </property>
          </widget>
@@ -105,7 +117,7 @@
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>17</height>
+            <height>20</height>
            </size>
           </property>
           <property name="text">
@@ -128,7 +140,7 @@
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>17</height>
+            <height>20</height>
            </size>
           </property>
           <property name="text">
@@ -141,7 +153,13 @@
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>14</height>
+            <height>20</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
            </size>
           </property>
          </widget>
@@ -151,7 +169,7 @@
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>17</height>
+            <height>20</height>
            </size>
           </property>
           <property name="text">
@@ -164,7 +182,13 @@
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>17</height>
+            <height>20</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
            </size>
           </property>
           <property name="text">
@@ -200,7 +224,7 @@
      <property name="maximumSize">
       <size>
        <width>16777215</width>
-       <height>100</height>
+       <height>16777215</height>
       </size>
      </property>
      <property name="title">
@@ -221,21 +245,34 @@
       </property>
       <item>
        <layout class="QGridLayout" name="gridLayout_2">
+        <property name="horizontalSpacing">
+         <number>6</number>
+        </property>
+        <property name="verticalSpacing">
+         <number>2</number>
+        </property>
         <item row="0" column="0">
-         <widget class="QComboBox" name="actionComboBox"/>
+         <widget class="QComboBox" name="actionComboBox">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>20</height>
+           </size>
+          </property>
+         </widget>
         </item>
         <item row="2" column="1">
          <widget class="QPushButton" name="armDisarmButton">
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>17</height>
+            <height>24</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
             <width>16777215</width>
-            <height>30</height>
+            <height>16777215</height>
            </size>
           </property>
           <property name="text">
@@ -248,7 +285,7 @@
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>17</height>
+            <height>24</height>
            </size>
           </property>
           <property name="maximumSize">
@@ -267,13 +304,13 @@
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>17</height>
+            <height>24</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
             <width>16777215</width>
-            <height>30</height>
+            <height>16777215</height>
            </size>
           </property>
           <property name="text">
@@ -292,7 +329,7 @@
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>0</height>
+            <height>20</height>
            </size>
           </property>
          </widget>
@@ -308,7 +345,7 @@
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>17</height>
+            <height>20</height>
            </size>
           </property>
           <property name="styleSheet">

@@ -545,7 +545,7 @@ void CompassConfig::scaledImu2MessageUpdate(UASInterface* uas, mavlink_scaled_im
 
 void CompassConfig::showCompassMotorCalibrationDialog()
 {
-    CompassMotorCalibrationDialog *dialog = new CompassMotorCalibrationDialog();
+    CompassMotorCalibrationDialog *dialog = new CompassMotorCalibrationDialog(this);
     if(dialog->exec() == QDialog::Accepted){
         // This modal, as you cannot do anything else while doing a compassMot
         QLOG_DEBUG() << "Compass Mot Success!";
@@ -557,7 +557,7 @@ void CompassConfig::showCompassMotorCalibrationDialog()
 
 void CompassConfig::showCompassOnboardCalibrationDialog()
 {
-    CompassOnboardCalibrationDialog *dialog = new CompassOnboardCalibrationDialog();
+    CompassOnboardCalibrationDialog *dialog = new CompassOnboardCalibrationDialog(this);
     if(dialog->exec() == QDialog::Accepted){
         // This modal, as you cannot do anything else while doing a compass calibration.
         QLOG_DEBUG() << "Compass Onboard Calibration Complete.";

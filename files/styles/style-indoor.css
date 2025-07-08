@@ -293,13 +293,18 @@ QDoubleSpinBox::down-button {
 }
 
 QPushButton {
-    /*min-height: 16px;*/
 	border: 1px solid #465158;
     margin: 1px;
     border-radius: 3px;
-	padding-left: 8px;
-	padding-right: 8px;
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #59666f, stop: 1 #414B52);
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+QPushButton::default {
+    border: 1px solid #AA6269;
 }
 
 QPushButton:disabled {
