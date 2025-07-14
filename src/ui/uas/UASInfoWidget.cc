@@ -28,7 +28,7 @@ This file is part of the PIXHAWK project
  *   @author Lorenz Meier <mavteam@student.ethz.ch>
  *
  */
-
+#include "ui_UASInfo.h"
 #include "UASInfoWidget.h"
 #include "UASManager.h"
 #include "QGC.h"
@@ -43,7 +43,7 @@ This file is part of the PIXHAWK project
 
 UASInfoWidget::UASInfoWidget(QWidget *parent, QString name) : QWidget(parent)
 {
-    ui.setupUi(this);
+    ui->setupUi(this);
     this->name = name;
     activeUAS = NULL;
 
@@ -74,7 +74,8 @@ UASInfoWidget::UASInfoWidget(QWidget *parent, QString name) : QWidget(parent)
 
 UASInfoWidget::~UASInfoWidget()
 {
-
+    delete ui;
+    ui = nullptr;
 }
 
 void UASInfoWidget::showEvent(QShowEvent* event)
@@ -177,20 +178,20 @@ void UASInfoWidget::setTimeRemaining(UASInterface* uas, double seconds)
 
 void UASInfoWidget::refresh()
 {
-    ui.voltageLabel->setText(QString::number(this->voltage, 'f', voltageDecimals));
-    ui.batteryBar->setValue(qMax(0,qMin(static_cast<int>(this->chargeLevel), 100)));
+    ui->voltageLabel->setText(QString::number(this->voltage, 'f', voltageDecimals));
+    ui->batteryBar->setValue(qMax(0,qMin(static_cast<int>(this->chargeLevel), 100)));
 
-    ui.loadLabel->setText(QString::number(this->load, 'f', loadDecimals));
-    ui.loadBar->setValue(qMax(0, qMin(static_cast<int>(this->load), 100)));
+    ui->loadLabel->setText(QString::number(this->load, 'f', loadDecimals));
+    ui->loadBar->setValue(qMax(0, qMin(static_cast<int>(this->load), 100)));
 
-    ui.receiveLossBar->setValue(qMax(0, qMin(static_cast<int>(receiveLoss), 100)));
-    ui.receiveLossLabel->setText(QString::number(receiveLoss, 'f', 2));
+    ui->receiveLossBar->setValue(qMax(0, qMin(static_cast<int>(receiveLoss), 100)));
+    ui->receiveLossLabel->setText(QString::number(receiveLoss, 'f', 2));
 
-    ui.sendLossBar->setValue(sendLoss);
-    ui.sendLossLabel->setText(QString::number(sendLoss, 'f', 2));
+    ui->sendLossBar->setValue(sendLoss);
+    ui->sendLossLabel->setText(QString::number(sendLoss, 'f', 2));
 
-    ui.label_5->setText(QString::number(this->load, 'f', loadDecimals));
-    ui.progressBar->setValue(qMax(0, qMin(static_cast<int>(this->load), 100)));
+    ui->label_5->setText(QString::number(this->load, 'f', loadDecimals));
+    ui->progressBar->setValue(qMax(0, qMin(static_cast<int>(this->load), 100)));
 
     QString errorString;
     QMapIterator<QString, int> i(errors);
@@ -203,5 +204,5 @@ void UASInfoWidget::refresh()
 
 
     }
-    ui.errorLabel->setText(errorString);
+    ui->errorLabel->setText(errorString);
 }

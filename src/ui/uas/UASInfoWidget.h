@@ -37,8 +37,9 @@ This file is part of the QGROUNDCONTROL project
 #include <QMap>
 
 #include "UASInterface.h"
-#include "ui_UASInfo.h"
-
+namespace Ui {
+class UASInfo;
+}
 /**
  * @brief Info indicator for the currently active UAS
  *
@@ -111,7 +112,7 @@ protected:
     void hideEvent(QHideEvent* event);
 
 private:
-    Ui::uasInfo ui;
+    Ui::UASInfo *ui;
 
 };
 

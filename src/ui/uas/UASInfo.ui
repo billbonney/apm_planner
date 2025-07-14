@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>uasInfo</class>
- <widget class="QWidget" name="uasInfo">
+ <class>UASInfo</class>
+ <widget class="QWidget" name="UASInfo">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>230</width>
-    <height>161</height>
+    <width>234</width>
+    <height>162</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <string notr="true"/>
   </property>
   <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0,0,0,0,100" columnstretch="0,0,0,0,0,0,0">
-   <property name="margin">
+   <property name="margin" stdset="0">
     <number>3</number>
    </property>
    <property name="spacing">

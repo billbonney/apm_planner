@@ -36,8 +36,11 @@ This file is part of the QGROUNDCONTROL project
 #include <QLineEdit>
 #include <QString>
 #include <QPushButton>
-#include <ui_UASControl.h>
 #include <UASInterface.h>
+
+namespace Ui {
+class UASControl;
+}
 
 /**
  * @brief Widget controlling one MAV
@@ -80,7 +83,7 @@ protected:
     bool m_engineOn;        ///< Engine state
 
 private:
-    Ui::uasControl ui;
+    Ui::UASControl *ui;
 
 };
 

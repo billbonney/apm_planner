@@ -26,7 +26,7 @@ This file is part of the APM_PLANNER project
  * @date 17 Mrz 2017
  * @brief File providing implementation for the log analysing classes
  */
-
+#include "ui_LogAnalysis.h"
 #include "LogAnalysis.h"
 #include "logging.h"
 
@@ -234,7 +234,7 @@ LogAnalysis::LogAnalysis(QWidget *parent) :
     mp_cursorRight(nullptr)
 {
     QLOG_DEBUG() << "LogAnalysis::LogAnalysis - CTOR";
-    ui.setupUi(this);
+    ui->setupUi(this);
 
     // add menu bar
     m_menuBarPtr.reset(new QMenuBar(this));
@@ -263,16 +263,16 @@ LogAnalysis::LogAnalysis(QWidget *parent) :
     layout()->setMenuBar(m_menuBarPtr.data());
 
     // create QCustomPlot
-    m_plotPtr.reset(new QCustomPlot(ui.widget));
+    m_plotPtr.reset(new QCustomPlot(ui->widget));
 
     // Setup UI
-    ui.verticalLayout_5->insertWidget(0, m_plotPtr.data());
-    ui.horizontalLayout_3->setStretch(0,5);
-    ui.horizontalLayout_3->setStretch(1,1);
-    ui.horizontalSplitter->setStretchFactor(0,20);
-    ui.horizontalSplitter->setStretchFactor(1,1);
-    ui.tableWidget->verticalHeader()->setDefaultSectionSize(ui.tableWidget->fontMetrics().height() + s_ROW_HEIGHT_PADDING);
-    ui.tableFilterGroupBox->setVisible(false);
+    ui->verticalLayout_5->insertWidget(0, m_plotPtr.data());
+    ui->horizontalLayout_3->setStretch(0,5);
+    ui->horizontalLayout_3->setStretch(1,1);
+    ui->horizontalSplitter->setStretchFactor(0,20);
+    ui->horizontalSplitter->setStretchFactor(1,1);
+    ui->tableWidget->verticalHeader()->setDefaultSectionSize(ui->tableWidget->fontMetrics().height() + s_ROW_HEIGHT_PADDING);
+    ui->tableFilterGroupBox->setVisible(false);
 
     // on window open table view is hidden
     hideTableView(true);
@@ -338,28 +338,28 @@ LogAnalysis::LogAnalysis(QWidget *parent) :
     m_plotPtr->replot();
 
     // connect to default signals
-    connect(ui.showValuesCheckBox,      SIGNAL(clicked(bool)), this, SLOT(showValueUnderMouseClicked(bool)));
-    connect(ui.modeDisplayCheckBox,     SIGNAL(clicked(bool)), this, SLOT(modeCheckboxClicked(bool)));
-    connect(ui.evDisplayCheckBox,       SIGNAL(clicked(bool)), this, SLOT(eventCheckboxClicked(bool)));
-    connect(ui.errDisplayCheckBox,      SIGNAL(clicked(bool)), this, SLOT(errorCheckboxClicked(bool)));
-    connect(ui.msgDisplayCheckBox,      SIGNAL(clicked(bool)), this, SLOT(msgCheckboxClicked(bool)));
-    connect(ui.indexTypeCheckBox,       SIGNAL(clicked(bool)), this, SLOT(indexTypeCheckBoxClicked(bool)));
-    connect(ui.tableCursorCheckBox,     SIGNAL(clicked(bool)), this, SLOT(enableTableCursor(bool)));
-    connect(ui.rangeCursorCheckBox,     SIGNAL(clicked(bool)), this, SLOT(enableRangeCursor(bool)));
+    connect(ui->showValuesCheckBox,      SIGNAL(clicked(bool)), this, SLOT(showValueUnderMouseClicked(bool)));
+    connect(ui->modeDisplayCheckBox,     SIGNAL(clicked(bool)), this, SLOT(modeCheckboxClicked(bool)));
+    connect(ui->evDisplayCheckBox,       SIGNAL(clicked(bool)), this, SLOT(eventCheckboxClicked(bool)));
+    connect(ui->errDisplayCheckBox,      SIGNAL(clicked(bool)), this, SLOT(errorCheckboxClicked(bool)));
+    connect(ui->msgDisplayCheckBox,      SIGNAL(clicked(bool)), this, SLOT(msgCheckboxClicked(bool)));
+    connect(ui->indexTypeCheckBox,       SIGNAL(clicked(bool)), this, SLOT(indexTypeCheckBoxClicked(bool)));
+    connect(ui->tableCursorCheckBox,     SIGNAL(clicked(bool)), this, SLOT(enableTableCursor(bool)));
+    connect(ui->rangeCursorCheckBox,     SIGNAL(clicked(bool)), this, SLOT(enableRangeCursor(bool)));
 
-    connect(ui.filterSelectTreeWidget,SIGNAL(itemChanged(QTreeWidgetItem*,int)),this,SLOT(filterItemChanged(QTreeWidgetItem*,int)));
-    connect(ui.filterAcceptPushButton,SIGNAL(clicked()),this,SLOT(filterAcceptClicked()));
-    connect(ui.filterCancelPushButton,SIGNAL(clicked()),this,SLOT(filterCancelClicked()));
-    connect(ui.filterShowPushButton,SIGNAL(clicked()),this,SLOT(showFilterButtonClicked()));
-    connect(ui.filterSelectAllPushButton,SIGNAL(clicked()),this,SLOT(filterSelectAllClicked()));
-    connect(ui.filterInvertSelectPushButton,SIGNAL(clicked()),this,SLOT(filterSelectInvertClicked()));
+    connect(ui->filterSelectTreeWidget,SIGNAL(itemChanged(QTreeWidgetItem*,int)),this,SLOT(filterItemChanged(QTreeWidgetItem*,int)));
+    connect(ui->filterAcceptPushButton,SIGNAL(clicked()),this,SLOT(filterAcceptClicked()));
+    connect(ui->filterCancelPushButton,SIGNAL(clicked()),this,SLOT(filterCancelClicked()));
+    connect(ui->filterShowPushButton,SIGNAL(clicked()),this,SLOT(showFilterButtonClicked()));
+    connect(ui->filterSelectAllPushButton,SIGNAL(clicked()),this,SLOT(filterSelectAllClicked()));
+    connect(ui->filterInvertSelectPushButton,SIGNAL(clicked()),this,SLOT(filterSelectInvertClicked()));
 
-    connect(ui.graphControlsPushButton, SIGNAL(clicked()), this, SLOT(graphControlsButtonClicked()));
-    connect(ui.resetScalingPushButton, SIGNAL(clicked()), this, SLOT(resetValueScaling()));
+    connect(ui->graphControlsPushButton, SIGNAL(clicked()), this, SLOT(graphControlsButtonClicked()));
+    connect(ui->resetScalingPushButton, SIGNAL(clicked()), this, SLOT(resetValueScaling()));
 
-    connect(ui.storeGraphSettingsButton, SIGNAL(clicked()), this, SLOT(storeGraphSettingsPressed()));
-    connect(ui.applyGraphSettingsButton, SIGNAL(clicked()), this, SLOT(applyGraphSettingsPressed()));
-    connect(ui.storeToPresetPushBtn, SIGNAL(clicked()), this, SLOT(addCurrentViewToPreset()));
+    connect(ui->storeGraphSettingsButton, SIGNAL(clicked()), this, SLOT(storeGraphSettingsPressed()));
+    connect(ui->applyGraphSettingsButton, SIGNAL(clicked()), this, SLOT(applyGraphSettingsPressed()));
+    connect(ui->storeToPresetPushBtn, SIGNAL(clicked()), this, SLOT(addCurrentViewToPreset()));
 
     loadSettings();
 
@@ -376,6 +376,9 @@ LogAnalysis::~LogAnalysis()
     {
         mp_logAnalysisMap->deleteLater();
     }
+
+    delete ui;
+    ui = nullptr;
 }
 
 void LogAnalysis::loadLog(QString filename)
@@ -424,7 +427,7 @@ void LogAnalysis::setTablePos(double xPosition)
 
         if ( position >= max )
         {
-            ui.tableWidget->scrollToBottom();
+            ui->tableWidget->scrollToBottom();
             double plotPos = m_useTimeOnXAxis ? m_dataStoragePtr->getMaxTimeStamp() : static_cast<double>(max);
             mp_cursorSimple->setCurrentXPos(plotPos);
             if (mp_logAnalysisMap != nullptr)
@@ -435,7 +438,7 @@ void LogAnalysis::setTablePos(double xPosition)
         }
         else if ( position <= min )
         {
-            ui.tableWidget->scrollToTop();
+            ui->tableWidget->scrollToTop();
             double plotPos = m_useTimeOnXAxis ? m_dataStoragePtr->getMinTimeStamp() : static_cast<double>(min);
             mp_cursorSimple->setCurrentXPos(plotPos);
             if (mp_logAnalysisMap != nullptr)
@@ -465,8 +468,8 @@ void LogAnalysis::setTablePos(double xPosition)
                     index = mp_tableFilterProxyModel->mapFromSource(sourceIndex);
                 }
             }
-            ui.tableWidget->setCurrentIndex(index);
-            ui.tableWidget->scrollTo(index);
+            ui->tableWidget->setCurrentIndex(index);
+            ui->tableWidget->scrollTo(index);
 
             if (mp_logAnalysisMap != nullptr)
             {
@@ -543,8 +546,8 @@ void LogAnalysis::setupXAxisAndScroller()
         xAxis->setNumberPrecision(0);
         xAxis->setLabel("Index");
     }
-    ui.horizontalScrollBar->setMinimum(static_cast<int>(m_scrollStartIndex));
-    ui.horizontalScrollBar->setMaximum(static_cast<int>(m_scrollEndIndex));
+    ui->horizontalScrollBar->setMinimum(static_cast<int>(m_scrollStartIndex));
+    ui->horizontalScrollBar->setMaximum(static_cast<int>(m_scrollEndIndex));
 }
 
 void LogAnalysis::insertTextArrows()
@@ -628,16 +631,16 @@ void LogAnalysis::loadSettings()
 {
     QSettings settings;
     settings.beginGroup("LOGANALYSIS_SETTINGS");
-    ui.modeDisplayCheckBox->setChecked(settings.value("SHOW_MODE", Qt::Checked).toBool());
-    ui.errDisplayCheckBox->setChecked(settings.value("SHOW_ERR", Qt::Checked).toBool());
-    ui.evDisplayCheckBox->setChecked(settings.value("SHOW_EV", Qt::Checked).toBool());
-    ui.msgDisplayCheckBox->setChecked(settings.value("SHOW_MSG", Qt::Checked).toBool());
-    ui.showValuesCheckBox->setChecked(settings.value("SHOW_VALUES", Qt::Unchecked).toBool());
+    ui->modeDisplayCheckBox->setChecked(settings.value("SHOW_MODE", Qt::Checked).toBool());
+    ui->errDisplayCheckBox->setChecked(settings.value("SHOW_ERR", Qt::Checked).toBool());
+    ui->evDisplayCheckBox->setChecked(settings.value("SHOW_EV", Qt::Checked).toBool());
+    ui->msgDisplayCheckBox->setChecked(settings.value("SHOW_MSG", Qt::Checked).toBool());
+    ui->showValuesCheckBox->setChecked(settings.value("SHOW_VALUES", Qt::Unchecked).toBool());
 
     m_useTimeOnXAxis = settings.value("USE_TIMEINDEX", Qt::Unchecked).toBool();
-    ui.indexTypeCheckBox->setChecked(m_useTimeOnXAxis);
+    ui->indexTypeCheckBox->setChecked(m_useTimeOnXAxis);
 
-    ui.horizontalSplitter->restoreState(settings.value("HORIZONTAL_SPITTER_STATE").toByteArray());
+    ui->horizontalSplitter->restoreState(settings.value("HORIZONTAL_SPITTER_STATE").toByteArray());
 
     m_presetMgrPtr->setFileName(settings.value("PRESET_FILE").toString());
     settings.endGroup();
@@ -647,14 +650,14 @@ void LogAnalysis::saveSettings()
 {
     QSettings settings;
     settings.beginGroup("LOGANALYSIS_SETTINGS");
-    settings.setValue("SHOW_MODE", ui.modeDisplayCheckBox->isChecked());
-    settings.setValue("SHOW_ERR", ui.errDisplayCheckBox->isChecked());
-    settings.setValue("SHOW_EV", ui.evDisplayCheckBox->isChecked());
-    settings.setValue("SHOW_MSG", ui.msgDisplayCheckBox->isChecked());
-    settings.setValue("SHOW_VALUES", ui.showValuesCheckBox->isChecked());
-    settings.setValue("USE_TIMEINDEX", ui.indexTypeCheckBox->isChecked());
+    settings.setValue("SHOW_MODE", ui->modeDisplayCheckBox->isChecked());
+    settings.setValue("SHOW_ERR", ui->errDisplayCheckBox->isChecked());
+    settings.setValue("SHOW_EV", ui->evDisplayCheckBox->isChecked());
+    settings.setValue("SHOW_MSG", ui->msgDisplayCheckBox->isChecked());
+    settings.setValue("SHOW_VALUES", ui->showValuesCheckBox->isChecked());
+    settings.setValue("USE_TIMEINDEX", ui->indexTypeCheckBox->isChecked());
 
-    settings.setValue("HORIZONTAL_SPITTER_STATE", ui.horizontalSplitter->saveState());
+    settings.setValue("HORIZONTAL_SPITTER_STATE", ui->horizontalSplitter->saveState());
 
     QFileInfo fileInfo = m_presetMgrPtr->getFileInfo();
     QString filePath;
@@ -709,13 +712,13 @@ void LogAnalysis::hideTableView(bool hide)
 {
     if (hide)
     {
-        ui.splitter->setSizes(QList<int>() << 1 << 0);
-        ui.filterShowPushButton->setDisabled(true);
+        ui->splitter->setSizes(QList<int>() << 1 << 0);
+        ui->filterShowPushButton->setDisabled(true);
     }
     else
     {
-        ui.splitter->setSizes(QList<int>() << 1 << 1);
-        ui.filterShowPushButton->setDisabled(false);
+        ui->splitter->setSizes(QList<int>() << 1 << 1);
+        ui->filterShowPushButton->setDisabled(false);
     }
 }
 
@@ -804,11 +807,11 @@ void LogAnalysis::logLoadingDone(AP2DataPlotStatus status)
 
     // Insert data into tree view suppressing all measurements containing strings as values
     fmtMapType fmtMap = m_dataStoragePtr->getFmtValues(true);
-    ui.dataSelectionScreen->addItems(fmtMap);
+    ui->dataSelectionScreen->addItems(fmtMap);
 
     // and connect the signals for enabling and disabling
-    connect(ui.dataSelectionScreen, SIGNAL(itemEnabled(QString)), this, SLOT(itemEnabled(QString)));
-    connect(ui.dataSelectionScreen, SIGNAL(itemDisabled(QString)), this, SLOT(itemDisabled(QString)));
+    connect(ui->dataSelectionScreen, SIGNAL(itemEnabled(QString)), this, SLOT(itemEnabled(QString)));
+    connect(ui->dataSelectionScreen, SIGNAL(itemDisabled(QString)), this, SLOT(itemDisabled(QString)));
 
     // Insert data into filter window including all measurements with string data
     fmtMap.clear();
@@ -816,13 +819,13 @@ void LogAnalysis::logLoadingDone(AP2DataPlotStatus status)
     for (fmtMapType::const_iterator iter = fmtMap.constBegin(); iter != fmtMap.constEnd(); ++iter)
     {
         QStringList parts = iter.key().split('.');
-        QList<QTreeWidgetItem*> findlist = ui.filterSelectTreeWidget->findItems(parts[0], Qt::MatchContains);   // is this group already in tree?
+        QList<QTreeWidgetItem*> findlist = ui->filterSelectTreeWidget->findItems(parts[0], Qt::MatchContains);   // is this group already in tree?
         if(findlist.empty())
         {
             QTreeWidgetItem *child = new QTreeWidgetItem(QStringList() << parts[0]);
             child->setFlags(child->flags() | Qt::ItemIsUserCheckable);
             child->setCheckState(0, Qt::Checked); // Set it checked, since all items are enabled by default
-            ui.filterSelectTreeWidget->addTopLevelItem(child);
+            ui->filterSelectTreeWidget->addTopLevelItem(child);
             m_tableFilterList.append(parts[0]);
         }
     }
@@ -840,22 +843,22 @@ void LogAnalysis::logLoadingDone(AP2DataPlotStatus status)
     insertTextArrows();
 
     // connect scroll bars
-    connect(ui.verticalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(verticalScrollMoved(int)));
-    connect(ui.horizontalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(horizontalScrollMoved(int)));
+    connect(ui->verticalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(verticalScrollMoved(int)));
+    connect(ui->horizontalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(horizontalScrollMoved(int)));
     connect(m_plotPtr->axisRect()->axis(QCPAxis::atBottom), SIGNAL(rangeChanged(QCPRange)), this, SLOT(xAxisChanged(QCPRange)));
     // set range -> whole graph should be viewable therefore 20 percent offset on both sides
     qint64 offset = (m_scrollEndIndex - m_scrollStartIndex) / 20;
     m_plotPtr->axisRect()->axis(QCPAxis::atBottom)->setRange(static_cast<double>(m_scrollStartIndex - offset), static_cast<double>(m_scrollEndIndex + offset));
-    ui.verticalScrollBar->setValue(ui.verticalScrollBar->maximum());
+    ui->verticalScrollBar->setValue(ui->verticalScrollBar->maximum());
 
     // Set up proxy for table filtering
     mp_tableFilterProxyModel = new QSortFilterProxyModel(this);     // will be deleted upon destruction of "this"
     mp_tableFilterProxyModel->setSourceModel(m_dataStoragePtr.data());
-    ui.tableWidget->setModel(mp_tableFilterProxyModel);
-    connect(ui.tableWidget->selectionModel(), SIGNAL(currentRowChanged(QModelIndex, QModelIndex)), this, SLOT(selectedRowChanged(QModelIndex, QModelIndex)));
+    ui->tableWidget->setModel(mp_tableFilterProxyModel);
+    connect(ui->tableWidget->selectionModel(), SIGNAL(currentRowChanged(QModelIndex, QModelIndex)), this, SLOT(selectedRowChanged(QModelIndex, QModelIndex)));
 
-    // Graph is loaded - Setup ui. Connect mouseMove signal according to checkbox state
-    if(ui.showValuesCheckBox->isChecked())
+    // Graph is loaded - Setup ui-> Connect mouseMove signal according to checkbox state
+    if(ui->showValuesCheckBox->isChecked())
     {
         connect(m_plotPtr.data(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(plotMouseMove(QMouseEvent*)));
     }
@@ -864,10 +867,10 @@ void LogAnalysis::logLoadingDone(AP2DataPlotStatus status)
     hideTableView(false);
 
     // Enable only the layers that are enabled by their checkbox
-    if(ui.modeDisplayCheckBox->isChecked()) m_plotPtr->layer(ModeMessage::TypeName)->setVisible(true);
-    if(ui.evDisplayCheckBox->isChecked())   m_plotPtr->layer(EventMessage::TypeName)->setVisible(true);
-    if(ui.errDisplayCheckBox->isChecked())  m_plotPtr->layer(ErrorMessage::TypeName)->setVisible(true);
-    if(ui.msgDisplayCheckBox->isChecked())  m_plotPtr->layer(MsgMessage::TypeName)->setVisible(true);
+    if(ui->modeDisplayCheckBox->isChecked()) m_plotPtr->layer(ModeMessage::TypeName)->setVisible(true);
+    if(ui->evDisplayCheckBox->isChecked())   m_plotPtr->layer(EventMessage::TypeName)->setVisible(true);
+    if(ui->errDisplayCheckBox->isChecked())  m_plotPtr->layer(ErrorMessage::TypeName)->setVisible(true);
+    if(ui->msgDisplayCheckBox->isChecked())  m_plotPtr->layer(MsgMessage::TypeName)->setVisible(true);
     m_plotPtr->layer(s_CursorLayerName)->setVisible(true);  // cursor layer is always visible
 
     // final rescaling and plotting.
@@ -940,17 +943,17 @@ void LogAnalysis::horizontalScrollMoved(int value)
 
 void LogAnalysis::xAxisChanged(QCPRange range)
 {
-    disconnect(ui.horizontalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(horizontalScrollMoved(int)));
-    disconnect(ui.verticalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(verticalScrollMoved(int)));
+    disconnect(ui->horizontalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(horizontalScrollMoved(int)));
+    disconnect(ui->verticalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(verticalScrollMoved(int)));
 
-    ui.horizontalScrollBar->setValue(qRound(range.center())); // adjust position of scroll bar slider
-    ui.horizontalScrollBar->setPageStep(qRound(range.size())); // adjust size of scroll bar slider
+    ui->horizontalScrollBar->setValue(qRound(range.center())); // adjust position of scroll bar slider
+    ui->horizontalScrollBar->setPageStep(qRound(range.size())); // adjust size of scroll bar slider
     double totalrange = static_cast<double>(m_scrollEndIndex - m_scrollStartIndex);
     double currentrange = range.upper - range.lower;
-    ui.verticalScrollBar->setValue(static_cast<int>(100.0 * (currentrange / totalrange)));
+    ui->verticalScrollBar->setValue(static_cast<int>(100.0 * (currentrange / totalrange)));
 
-    connect(ui.horizontalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(horizontalScrollMoved(int)));
-    connect(ui.verticalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(verticalScrollMoved(int)));
+    connect(ui->horizontalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(horizontalScrollMoved(int)));
+    connect(ui->verticalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(verticalScrollMoved(int)));
 }
 
 void LogAnalysis::itemEnabled(QString name)
@@ -962,7 +965,7 @@ void LogAnalysis::itemEnabled(QString name)
     {
         //No values!
         QLOG_WARN() << "No values in datamodel for " << name;
-        ui.dataSelectionScreen->disableItem(name);
+        ui->dataSelectionScreen->disableItem(name);
         return;
     }
 
@@ -1060,7 +1063,7 @@ void LogAnalysis::indexTypeCheckBoxClicked(bool checked)
     {
         m_useTimeOnXAxis = checked;
         // We have to remove all graphs when changing x-axis storing the active selection
-        QList<QString> reEnableList = ui.dataSelectionScreen->disableAllItems();
+        QList<QString> reEnableList = ui->dataSelectionScreen->disableAllItems();
 
         // remove the text arrows and cursors
         m_plotPtr->clearItems();
@@ -1070,27 +1073,27 @@ void LogAnalysis::indexTypeCheckBoxClicked(bool checked)
         m_cursorXAxisRange = 0.0; // no cursor no range
 
         // uncheck cursor checkboxes
-        ui.tableCursorCheckBox->setCheckState(Qt::Unchecked);
-        ui.rangeCursorCheckBox->setCheckState(Qt::Unchecked);
+        ui->tableCursorCheckBox->setCheckState(Qt::Unchecked);
+        ui->rangeCursorCheckBox->setCheckState(Qt::Unchecked);
 
         // arrows can be inserted instantly again
         m_statusTextPos = 0;    // reset text arrow length
         insertTextArrows();
 
         // Graphs can be reenabled using previous stored selection
-        ui.dataSelectionScreen->enableItemList(reEnableList);
+        ui->dataSelectionScreen->enableItemList(reEnableList);
 
         // Re -set x axis, scroller and zoom
-        disconnect(ui.verticalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(verticalScrollMoved(int)));
-        disconnect(ui.horizontalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(horizontalScrollMoved(int)));
+        disconnect(ui->verticalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(verticalScrollMoved(int)));
+        disconnect(ui->horizontalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(horizontalScrollMoved(int)));
 
         setupXAxisAndScroller();
         m_plotPtr->axisRect()->axis(QCPAxis::atBottom)->setRange(static_cast<double>(m_scrollStartIndex), static_cast<double>(m_scrollEndIndex));
         m_plotPtr->replot();
-        ui.verticalScrollBar->setValue(ui.verticalScrollBar->maximum());
+        ui->verticalScrollBar->setValue(ui->verticalScrollBar->maximum());
 
-        connect(ui.verticalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(verticalScrollMoved(int)));
-        connect(ui.horizontalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(horizontalScrollMoved(int)));
+        connect(ui->verticalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(verticalScrollMoved(int)));
+        connect(ui->horizontalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(horizontalScrollMoved(int)));
     }
 }
 
@@ -1122,7 +1125,7 @@ void LogAnalysis::filterItemChanged(QTreeWidgetItem* item, int col)
 void LogAnalysis::filterAcceptClicked()
 {
     // All elements selected -> filter is disabled
-    if (ui.filterSelectTreeWidget->topLevelItemCount() == m_tableFilterList.size())
+    if (ui->filterSelectTreeWidget->topLevelItemCount() == m_tableFilterList.size())
     {
         disableTableFilter();
     }
@@ -1139,48 +1142,48 @@ void LogAnalysis::filterAcceptClicked()
         mp_tableFilterProxyModel->setFilterKeyColumn(1);
     }
 
-    ui.tableFilterGroupBox->setVisible(false);
+    ui->tableFilterGroupBox->setVisible(false);
 }
 
 void LogAnalysis::filterCancelClicked()
 {
-    ui.tableFilterGroupBox->setVisible(false);
+    ui->tableFilterGroupBox->setVisible(false);
 }
 
 void LogAnalysis::showFilterButtonClicked()
 {
-    if (ui.tableFilterGroupBox->isVisible())
+    if (ui->tableFilterGroupBox->isVisible())
     {
-        ui.tableFilterGroupBox->setVisible(false);
+        ui->tableFilterGroupBox->setVisible(false);
     }
     else
     {
-        ui.tableFilterGroupBox->setVisible(true);
+        ui->tableFilterGroupBox->setVisible(true);
     }
 }
 
 void LogAnalysis::filterSelectAllClicked()
 {
-    for (int i = 0; i < ui.filterSelectTreeWidget->topLevelItemCount(); ++i)
+    for (int i = 0; i < ui->filterSelectTreeWidget->topLevelItemCount(); ++i)
     {
-        if (ui.filterSelectTreeWidget->topLevelItem(i)->checkState(0) != Qt::Checked)
+        if (ui->filterSelectTreeWidget->topLevelItem(i)->checkState(0) != Qt::Checked)
         {
-            ui.filterSelectTreeWidget->topLevelItem(i)->setCheckState(0, Qt::Checked);
+            ui->filterSelectTreeWidget->topLevelItem(i)->setCheckState(0, Qt::Checked);
         }
     }
 }
 
 void LogAnalysis::filterSelectInvertClicked()
 {
-    for (int i = 0; i < ui.filterSelectTreeWidget->topLevelItemCount(); ++i)
+    for (int i = 0; i < ui->filterSelectTreeWidget->topLevelItemCount(); ++i)
     {
-        if (ui.filterSelectTreeWidget->topLevelItem(i)->checkState(0) == Qt::Checked)
+        if (ui->filterSelectTreeWidget->topLevelItem(i)->checkState(0) == Qt::Checked)
         {
-            ui.filterSelectTreeWidget->topLevelItem(i)->setCheckState(0,Qt::Unchecked);
+            ui->filterSelectTreeWidget->topLevelItem(i)->setCheckState(0,Qt::Unchecked);
         }
         else
         {
-            ui.filterSelectTreeWidget->topLevelItem(i)->setCheckState(0,Qt::Checked);
+            ui->filterSelectTreeWidget->topLevelItem(i)->setCheckState(0,Qt::Checked);
         }
     }
 }
@@ -1202,9 +1205,9 @@ void LogAnalysis::selectedRowChanged(QModelIndex current, QModelIndex previous)
         if (m_useTimeOnXAxis)
         {
             // Create QModelIndex pointing directly to timestamp value which is in colum 2
-            QModelIndex temp1 = ui.tableWidget->model()->index(current.row(), 2);
+            QModelIndex temp1 = ui->tableWidget->model()->index(current.row(), 2);
             // fetch the item from table
-            QMap<int, QVariant> map1 = ui.tableWidget->model()->itemData(temp1);
+            QMap<int, QVariant> map1 = ui->tableWidget->model()->itemData(temp1);
 
             if(m_dataStoragePtr->ModelIsScaled())
             {
@@ -1488,7 +1491,7 @@ void LogAnalysis::insertSimpleCursor()
         connect(mp_cursorSimple, SIGNAL(newCursorPos(double)), this, SLOT(setTablePos(double)));
         m_plotPtr->replot();
         // when cursors are inserted the check box should reflect this
-        ui.tableCursorCheckBox->setCheckState(Qt::Checked);
+        ui->tableCursorCheckBox->setCheckState(Qt::Checked);
     }
 }
 
@@ -1516,7 +1519,7 @@ void LogAnalysis::insertRangeCursors()
         connect(mp_cursorRight, SIGNAL(rangeCursorMoving()), this, SLOT(rangeCursorsMoving()));
         m_plotPtr->replot();
         // when cursors are inserted the check box should reflect this
-        ui.rangeCursorCheckBox->setCheckState(Qt::Checked);
+        ui->rangeCursorCheckBox->setCheckState(Qt::Checked);
     }
 }
 
@@ -1529,7 +1532,7 @@ void LogAnalysis::removeSimpleCursor()
     }
     m_plotPtr->replot();
     // when cursors are removed the check box should reflect this
-    ui.tableCursorCheckBox->setCheckState(Qt::Unchecked);
+    ui->tableCursorCheckBox->setCheckState(Qt::Unchecked);
 }
 
 void LogAnalysis::removeRangeCursors()
@@ -1547,7 +1550,7 @@ void LogAnalysis::removeRangeCursors()
     m_cursorXAxisRange = 0.0;   // no cursor no range
     m_plotPtr->replot();
     // when cursors are removed the check box should reflect this
-    ui.rangeCursorCheckBox->setCheckState(Qt::Unchecked);
+    ui->rangeCursorCheckBox->setCheckState(Qt::Unchecked);
 }
 
 void LogAnalysis::resetValueScaling()
@@ -1616,7 +1619,7 @@ void LogAnalysis::storeGraphSettingsPressed()
 
         preset.push_back(element);
     }
-    m_presetMgrPtr->saveSpecialSet(preset, ui.indexTypeCheckBox->isChecked());
+    m_presetMgrPtr->saveSpecialSet(preset, ui->indexTypeCheckBox->isChecked());
 }
 
 void LogAnalysis::applyGraphSettingsPressed()
@@ -1628,9 +1631,9 @@ void LogAnalysis::applyGraphSettingsPressed()
     bool usesTimeAxis = m_presetMgrPtr->loadSpecialSet(preset);
 
     // disable all open graphs
-    ui.dataSelectionScreen->disableAllItems();
+    ui->dataSelectionScreen->disableAllItems();
     // X-Axis settings
-    ui.indexTypeCheckBox->setChecked(usesTimeAxis);
+    ui->indexTypeCheckBox->setChecked(usesTimeAxis);
     indexTypeCheckBoxClicked(usesTimeAxis);
 
     // the enabling has to be done in 2 steps.
@@ -1643,7 +1646,7 @@ void LogAnalysis::applyGraphSettingsPressed()
     {
         enabledGraphList.push_back(preset.at(i).m_graph);
     }
-    ui.dataSelectionScreen->enableItemList(enabledGraphList);
+    ui->dataSelectionScreen->enableItemList(enabledGraphList);
 
     // convert preset to ranges and use grouping changed method to scale the graph
     QList<AP2DataPlotAxisDialog::GraphRange> graphRanges;
@@ -1655,7 +1658,7 @@ void LogAnalysis::analysisPresetSelected(PresetManager::presetElementVec preset)
 {
     QLOG_DEBUG() << "LogAnalysis::analysisPresetSelected()";
     // first clear the graph
-    ui.dataSelectionScreen->disableAllItems();
+    ui->dataSelectionScreen->disableAllItems();
 
     // Create list with enabled graphs and enable them
     QStringList enabledGraphList;
@@ -1663,7 +1666,7 @@ void LogAnalysis::analysisPresetSelected(PresetManager::presetElementVec preset)
     {
         enabledGraphList.push_back(preset.at(i).m_graph);
     }
-    ui.dataSelectionScreen->enableItemList(enabledGraphList);
+    ui->dataSelectionScreen->enableItemList(enabledGraphList);
 
     // now set range and color
     // convert preset to ranges and use grouping changed method to scale the graph

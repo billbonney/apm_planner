@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>uasControl</class>
- <widget class="QWidget" name="uasControl">
+ <class>UASControl</class>
+ <widget class="QWidget" name="UASControl">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -35,9 +35,9 @@
    <string>Control widget to send basic control actions to the micro air vehicle</string>
   </property>
   <layout class="QGridLayout" name="gridLayout" rowstretch="5,1,40,1,40,40,40,1000" columnstretch="5,20,20,25,5">
-   <property name="margin">
+     <property name="margin">
     <number>4</number>
-   </property>
+     </property>
    <item row="0" column="0" rowspan="7">
     <spacer name="horizontalSpacer">
      <property name="orientation">

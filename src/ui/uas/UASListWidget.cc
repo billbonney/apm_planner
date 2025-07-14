@@ -28,6 +28,7 @@ This file is part of the PIXHAWK project
  *
  */
 #include "UASListWidget.h"
+#include "ui_UASList.h"
 #include "UASManager.h"
 #include "UASView.h"
 #include "QGCUnconnectedInfoWidget.h"

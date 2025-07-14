@@ -29,6 +29,9 @@ This file is part of the PIXHAWK project
  *
  */
 
+#include "ui_UASControl.h"
+#include "UASControlWidget.h"
+
 #include <QString>
 #include <QTimer>
 #include <QLabel>
@@ -37,34 +40,32 @@ This file is part of the PIXHAWK project
 #include <QProcess>
 #include <QPalette>
 
-#include "UASControlWidget.h"
 #include <UASManager.h>
 #include <UAS.h>
-#include "QGC.h"
 
 UASControlWidget::UASControlWidget(QWidget *parent) : QWidget(parent),
     m_uas(0),
     m_uasMode(0),
     m_engineOn(false)
 {
-    ui.setupUi(this);
+    ui->setupUi(this);
 
     connect(UASManager::instance(), SIGNAL(activeUASSet(UASInterface*)), this, SLOT(setUAS(UASInterface*)));
-    ui.modeComboBox->clear();
-    ui.modeComboBox->insertItem(0, UAS::getShortModeTextFor(MAV_MODE_PREFLIGHT).remove(0, 2), MAV_MODE_PREFLIGHT);
-    ui.modeComboBox->insertItem(1, UAS::getShortModeTextFor((MAV_MODE_FLAG_STABILIZE_ENABLED | MAV_MODE_FLAG_MANUAL_INPUT_ENABLED)).remove(0, 2), (MAV_MODE_FLAG_STABILIZE_ENABLED | MAV_MODE_FLAG_MANUAL_INPUT_ENABLED));
-    ui.modeComboBox->insertItem(2, UAS::getShortModeTextFor(MAV_MODE_FLAG_MANUAL_INPUT_ENABLED).remove(0, 2), MAV_MODE_FLAG_MANUAL_INPUT_ENABLED);
-    ui.modeComboBox->insertItem(3, UAS::getShortModeTextFor((MAV_MODE_FLAG_STABILIZE_ENABLED | MAV_MODE_FLAG_MANUAL_INPUT_ENABLED | MAV_MODE_FLAG_GUIDED_ENABLED)).remove(0, 2), (MAV_MODE_FLAG_STABILIZE_ENABLED | MAV_MODE_FLAG_MANUAL_INPUT_ENABLED | MAV_MODE_FLAG_GUIDED_ENABLED));
-    ui.modeComboBox->insertItem(4, UAS::getShortModeTextFor((MAV_MODE_FLAG_STABILIZE_ENABLED | MAV_MODE_FLAG_MANUAL_INPUT_ENABLED | MAV_MODE_FLAG_GUIDED_ENABLED | MAV_MODE_FLAG_AUTO_ENABLED)).remove(0, 2), (MAV_MODE_FLAG_STABILIZE_ENABLED | MAV_MODE_FLAG_MANUAL_INPUT_ENABLED | MAV_MODE_FLAG_GUIDED_ENABLED | MAV_MODE_FLAG_AUTO_ENABLED));
-    ui.modeComboBox->insertItem(5, UAS::getShortModeTextFor((MAV_MODE_FLAG_MANUAL_INPUT_ENABLED | MAV_MODE_FLAG_TEST_ENABLED)).remove(0, 2), (MAV_MODE_FLAG_MANUAL_INPUT_ENABLED | MAV_MODE_FLAG_TEST_ENABLED));
-    connect(ui.modeComboBox, SIGNAL(activated(int)), this, SLOT(setMode(int)));
-    connect(ui.setModeButton, SIGNAL(clicked()), this, SLOT(transmitMode()));
+    ui->modeComboBox->clear();
+    ui->modeComboBox->insertItem(0, UAS::getShortModeTextFor(MAV_MODE_PREFLIGHT).remove(0, 2), MAV_MODE_PREFLIGHT);
+    ui->modeComboBox->insertItem(1, UAS::getShortModeTextFor((MAV_MODE_FLAG_STABILIZE_ENABLED | MAV_MODE_FLAG_MANUAL_INPUT_ENABLED)).remove(0, 2), (MAV_MODE_FLAG_STABILIZE_ENABLED | MAV_MODE_FLAG_MANUAL_INPUT_ENABLED));
+    ui->modeComboBox->insertItem(2, UAS::getShortModeTextFor(MAV_MODE_FLAG_MANUAL_INPUT_ENABLED).remove(0, 2), MAV_MODE_FLAG_MANUAL_INPUT_ENABLED);
+    ui->modeComboBox->insertItem(3, UAS::getShortModeTextFor((MAV_MODE_FLAG_STABILIZE_ENABLED | MAV_MODE_FLAG_MANUAL_INPUT_ENABLED | MAV_MODE_FLAG_GUIDED_ENABLED)).remove(0, 2), (MAV_MODE_FLAG_STABILIZE_ENABLED | MAV_MODE_FLAG_MANUAL_INPUT_ENABLED | MAV_MODE_FLAG_GUIDED_ENABLED));
+    ui->modeComboBox->insertItem(4, UAS::getShortModeTextFor((MAV_MODE_FLAG_STABILIZE_ENABLED | MAV_MODE_FLAG_MANUAL_INPUT_ENABLED | MAV_MODE_FLAG_GUIDED_ENABLED | MAV_MODE_FLAG_AUTO_ENABLED)).remove(0, 2), (MAV_MODE_FLAG_STABILIZE_ENABLED | MAV_MODE_FLAG_MANUAL_INPUT_ENABLED | MAV_MODE_FLAG_GUIDED_ENABLED | MAV_MODE_FLAG_AUTO_ENABLED));
+    ui->modeComboBox->insertItem(5, UAS::getShortModeTextFor((MAV_MODE_FLAG_MANUAL_INPUT_ENABLED | MAV_MODE_FLAG_TEST_ENABLED)).remove(0, 2), (MAV_MODE_FLAG_MANUAL_INPUT_ENABLED | MAV_MODE_FLAG_TEST_ENABLED));
+    connect(ui->modeComboBox, SIGNAL(activated(int)), this, SLOT(setMode(int)));
+    connect(ui->setModeButton, SIGNAL(clicked()), this, SLOT(transmitMode()));
 
-    m_uasMode = ui.modeComboBox->itemData(ui.modeComboBox->currentIndex()).toInt();
+    m_uasMode = ui->modeComboBox->itemData(ui->modeComboBox->currentIndex()).toInt();
 
-    ui.modeComboBox->setCurrentIndex(0);
+    ui->modeComboBox->setCurrentIndex(0);
 
-    ui.gridLayout->setAlignment(Qt::AlignTop);
+    ui->gridLayout->setAlignment(Qt::AlignTop);
 
 }
 
@@ -73,11 +74,11 @@ void UASControlWidget::setUAS(UASInterface* uas)
     if (m_uas != 0)
     {
         UASInterface* oldUAS = UASManager::instance()->getUASForId(this->m_uas);
-        disconnect(ui.controlButton, SIGNAL(clicked()), oldUAS, SLOT(armSystem()));
-        disconnect(ui.liftoffButton, SIGNAL(clicked()), oldUAS, SLOT(launch()));
-        disconnect(ui.landButton, SIGNAL(clicked()), oldUAS, SLOT(home()));
-        disconnect(ui.shutdownButton, SIGNAL(clicked()), oldUAS, SLOT(shutdown()));
-        //connect(ui.setHomeButton, SIGNAL(clicked()), uas, SLOT(setLocalOriginAtCurrentGPSPosition()));
+        disconnect(ui->controlButton, SIGNAL(clicked()), oldUAS, SLOT(armSystem()));
+        disconnect(ui->liftoffButton, SIGNAL(clicked()), oldUAS, SLOT(launch()));
+        disconnect(ui->landButton, SIGNAL(clicked()), oldUAS, SLOT(home()));
+        disconnect(ui->shutdownButton, SIGNAL(clicked()), oldUAS, SLOT(shutdown()));
+        //connect(ui->setHomeButton, SIGNAL(clicked()), uas, SLOT(setLocalOriginAtCurrentGPSPosition()));
         disconnect(uas, SIGNAL(modeChanged(int,QString,QString)), this, SLOT(updateMode(int,QString,QString)));
         disconnect(uas, SIGNAL(statusChanged(int)), this, SLOT(updateState(int)));
     }
@@ -88,15 +89,15 @@ void UASControlWidget::setUAS(UASInterface* uas)
     }
 
     // Connect user interface controls
-    connect(ui.controlButton, SIGNAL(clicked()), this, SLOT(cycleContextButton()));
-    connect(ui.liftoffButton, SIGNAL(clicked()), uas, SLOT(launch()));
-    connect(ui.landButton, SIGNAL(clicked()), uas, SLOT(home()));
-    connect(ui.shutdownButton, SIGNAL(clicked()), uas, SLOT(shutdown()));
-    //connect(ui.setHomeButton, SIGNAL(clicked()), uas, SLOT(setLocalOriginAtCurrentGPSPosition()));
+    connect(ui->controlButton, SIGNAL(clicked()), this, SLOT(cycleContextButton()));
+    connect(ui->liftoffButton, SIGNAL(clicked()), uas, SLOT(launch()));
+    connect(ui->landButton, SIGNAL(clicked()), uas, SLOT(home()));
+    connect(ui->shutdownButton, SIGNAL(clicked()), uas, SLOT(shutdown()));
+    //connect(ui->setHomeButton, SIGNAL(clicked()), uas, SLOT(setLocalOriginAtCurrentGPSPosition()));
     connect(uas, SIGNAL(modeChanged(int,QString,QString)), this, SLOT(updateMode(int,QString,QString)));
     connect(uas, SIGNAL(statusChanged(int)), this, SLOT(updateState(int)));
 
-    ui.controlStatusLabel->setText(tr("Connected to ") + uas->getUASName());
+    ui->controlStatusLabel->setText(tr("Connected to ") + uas->getUASName());
 
     m_uas = uas->getUASID();
     setBackgroundColor(uas->getColor());
@@ -112,11 +113,11 @@ void UASControlWidget::updateStatemachine()
 
     if (m_engineOn)
     {
-        ui.controlButton->setText(tr("DISARM SYSTEM"));
+        ui->controlButton->setText(tr("DISARM SYSTEM"));
     }
     else
     {
-        ui.controlButton->setText(tr("ARM SYSTEM"));
+        ui->controlButton->setText(tr("ARM SYSTEM"));
     }
 }
 
@@ -155,11 +156,11 @@ void UASControlWidget::updateState(int state)
     {
     case (int)MAV_STATE_ACTIVE:
         m_engineOn = true;
-        ui.controlButton->setText(tr("DISARM SYSTEM"));
+        ui->controlButton->setText(tr("DISARM SYSTEM"));
         break;
     case (int)MAV_STATE_STANDBY:
         m_engineOn = false;
-        ui.controlButton->setText(tr("ARM SYSTEM"));
+        ui->controlButton->setText(tr("ARM SYSTEM"));
         break;
     }
 }
@@ -170,10 +171,10 @@ void UASControlWidget::updateState(int state)
 void UASControlWidget::setMode(int mode)
 {
     // Adapt context button mode
-    m_uasMode = ui.modeComboBox->itemData(mode).toInt();
-    ui.modeComboBox->blockSignals(true);
-    ui.modeComboBox->setCurrentIndex(mode);
-    ui.modeComboBox->blockSignals(false);
+    m_uasMode = ui->modeComboBox->itemData(mode).toInt();
+    ui->modeComboBox->blockSignals(true);
+    ui->modeComboBox->setCurrentIndex(mode);
+    ui->modeComboBox->blockSignals(false);
 
     emit changedMode(mode);
 }
@@ -190,9 +191,9 @@ void UASControlWidget::transmitMode()
             m_uasMode &= ~MAV_MODE_FLAG_SAFETY_ARMED;
 
         mav->setMode(m_uasMode);
-        QString mode = ui.modeComboBox->currentText();
+        QString mode = ui->modeComboBox->currentText();
 
-        ui.lastActionLabel->setText(QString("Sent new mode %1 to %2").arg(mode).arg(mav->getUASName()));
+        ui->lastActionLabel->setText(QString("Sent new mode %1 to %2").arg(mode).arg(mav->getUASName()));
     }
 }
 
@@ -205,10 +206,10 @@ void UASControlWidget::cycleContextButton()
         if (!m_engineOn)
         {
             mav->armSystem();
-            ui.lastActionLabel->setText(QString("Enabled motors on %1").arg(mav->getUASName()));
+            ui->lastActionLabel->setText(QString("Enabled motors on %1").arg(mav->getUASName()));
         } else {
             mav->disarmSystem();
-            ui.lastActionLabel->setText(QString("Disabled motors on %1").arg(mav->getUASName()));
+            ui->lastActionLabel->setText(QString("Disabled motors on %1").arg(mav->getUASName()));
         }
         // Update state now and in several intervals when MAV might have changed state
         updateStatemachine();

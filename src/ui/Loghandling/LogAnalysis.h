@@ -43,10 +43,14 @@ This file is part of the APM_PLANNER project
 #include "AP2DataPlotThread.h"
 #include "AP2DataPlotStatus.h"
 #include "AP2DataPlotAxisDialog.h"
-#include "ui_LogAnalysis.h"
 #include "PresetManager.h"
 
 #include "LogAnalysisMap.h"
+
+
+namespace Ui {
+class LogAnalysis;
+};
 
 /**
  * @brief The LogAnalysisCursor class defines a cursor line (vertical selectable, movable line in plot).
@@ -277,7 +281,7 @@ private:
 
 
 
-    Ui::LogAnalysis ui;             ///< The user interface
+    Ui::LogAnalysis *ui;             ///< The user interface
     QAction *mp_KMLExportMenuEntry; ///<< used to en/disable the entry
 
     QScopedPointer<QCustomPlot>  m_plotPtr;            ///< Scoped pointer to QCustomplot

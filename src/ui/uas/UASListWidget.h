@@ -38,7 +38,10 @@ This file is part of the QGROUNDCONTROL project
 #include "UASInterface.h"
 #include "UASView.h"
 #include "QGCUnconnectedInfoWidget.h"
-#include "ui_UASList.h"
+
+namespace Ui {
+class UASList;
+}
 
 class UASListWidget : public QWidget
 {
